@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git_workout.md</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="git-and-github-for-beginners">Git and GitHub for beginners</h1>
+<p>Any important git-related words are <strong>bolded</strong></p>
+<p>In this tutorial we’re going to simulate what it would be like working on a big, collaborative project. This will involve making changes to the code base, opening up a <strong>pull request (PR)</strong> and <strong>merging</strong> your code into the master branch.</p>
+<h1 id="step-0-send-me-your-github-username">Step 0: Send me your GitHub username</h1>
+<p><strong>To push code changes to a GitHub repository, you must be listed as a collaborator on that repository. Please email me your GitHub username at diego@thebridge.tech so I can add you as a collaborator to the gittutorial repository.</strong></p>
+<h1 id="step-1--cloning-from-a-remote-server-to-your-local-machine">Step 1:  Cloning from a remote server to your local machine</h1>
+<p>The process of downloading a <strong>repo</strong> from a remote server to your local machine is known as <strong>cloning</strong>.</p>
+<p>To clone a repo, first you need to copy the repo’s URL as seen below.</p>
+<img src="https://github.com/diego-thebridge/git101/blob/master/Assets/git_clone.png">
+<p>Move to where you want to place the project on your local machine using the <code>cd</code> (change directory) command. For instance if you have a ‘projects’ folder on your desktop, you’d do something like<br>
+<code>cd ~/Desktop/projects</code></p>
+<p>When you clone a repo, it downloads a brand new folder which contains all the files inside of it (so you don’t need to make a specific folder for the project)</p>
+<p>Once you’re in the location you want to be, in the terminal, use the command:</p>
+<p><code>git clone https://github.com/diego-thebridge/git101</code></p>
+<p>It may prompt you to log in with your GitHub information.</p>
+<h1 id="step-2-checking-out-your-project">Step 2: Checking out your project</h1>
+<p>Now that you have the project on your local machine, you can look at all the files and the changes that have been made to it. There’s a couple things you can check out:</p>
+<p>a. The history of the project.<br>
+Using the command <code>git log</code> you can see a list of all the changes made in the project. For instance here is a project that only has one commit so far:</p>
+<p>b. What branches exist in the project<br>
+Using the command <code>git branch</code> you can see what branches a project contains</p>
+<p>In the picture above you can see that this one project has three branches in it. The master branch (which is basically always there), and ‘my-new-branch’ and ‘my-second-cool-feature’.</p>
+<h1 id="step-3-creating-a-new-branch">Step 3: Creating a new branch</h1>
+<p>You can create a new branch to base your changes off of. What this will do is make a pointer to the current commit you’re out, an start basing your code from those changes.</p>
+<p>Let’s say you are on the master branch (what you should be automatically), and want to create a new feature. What you do is run <code>git checkout -b &lt;my branch name&gt;</code>.</p>
+<p>Now, if someone makes more changes to the master branch after you’ve made our branch, your new branch won’t know about the changes unless you <strong>merge</strong> those changes into your branch.</p>
+<p>So let’s try it out!<br>
+Run <code>git checkout -b &lt;your name&gt;</code><br>
+What this does is say, “Hey git, I want to create a new branch (that’s what the ‘-b’ flag does) and then I want you to move me onto that branch (that’s what the ‘checkout’ does).”</p>
+<p>Afterwards you can use the <code>git branch</code> command to confirm that your branch really was created!</p>
+<p>You should notice that you’re now pointed towards your new branch as well.</p>
+<h1 id="step-4-adding-a-new-file-to-the-repo">Step 4: Adding a new file to the repo</h1>
+<p>Go ahead and add a new file to the project. You can use any text editor you like. Name it something like yourname.txt.<br>
+Once you add or modify files in a folder that contains a git repo, git notices it. But it won’t add the file to a commit unless you tell it to.</p>
+<p>After creating the new file, you can use the <code>git status</code> command to see what files it knows about.</p>
+<p>What this is saying above is, ‘Hey, we noticed you created a new file mnelson.txt, but unless you use the ```git add`` command we aren’t going to touch it.’</p>
+<h1 id="step-5-creating-a-commit">Step 5: Creating a commit</h1>
+<p>Now we’re going to tell git that we do want it to care about the file!</p>
+<p>Use the command <code>git add &lt;your file name&gt;</code></p>
+<p>What this does is put your file in the staging or index environment. It’s saying, ‘Hey, we’re about to make a commit with this specific file’. This gives you the ability to not commit every single file you’ve changed.</p>
+<p>If you run the <code>git status</code> command you’ll see it looks a little different. Now it’s saying that that given file is getting ready to be commited. To clarify, it has <strong>not</strong> yet been put into a commit, but it will be soon!</p>
+<p>Now we’ll make the commit!<br>
+Run the command <code>git commit -m "Your message about the commit"</code></p>
+<p>The message you put at the end of the commit should be something related to what the commit contains - maybe it’s a new feature, maybe it’s a bug fix, maybe it’s just fixing a typo. It shouldn’t be something like “asdfadsf” or “foobar”. That makes the other people who see your commit sad.</p>
+<h1 id="step-6-pushing-a-branch-to-the-github">Step 6: Pushing a branch to the GitHub</h1>
+<p>Now we’ll <strong>push</strong> the commit in your branch to GitHub. This allows other people to see your changes. If they’re approved, then they’ll be merged into the master branch.</p>
+<p>To push into your new branch on GitHub, the command name is <code>git push origin yourbranchname</code></p>
+<p>GitHub will automatically create the branch for you on the server.</p>
+<p>You may be wondering what that “origin” word is in the command above. What happens when you clone a remote repository to your local machine, git creates an <strong>alias</strong> for you. In nearly all cases this alias is <strong>origin</strong>. It’s essentially a shorthand for that remote repository’s URL. This means to push your changes to the remote repository, you could’ve used either the command:<br>
+<code>git push git@github.com:git/git.git yourbranchname</code><br>
+or<br>
+<code>git push origin yourbranchname</code></p>
+<p>You can check now on GitHub to see that the branch has been created. Go to the fron page of the repository: <a href="https://github.com/diegogl/git101">https://github.com/diegogl/git101</a></p>
+<p>You may see a little note saying a branch with your name has just been pushed into the repository. You can also click the ‘branches’ link to see your branch listed there.</p>
+<p>Now click the green button seen to the bottom right of that picture. We’re going to make a <strong>pull request</strong>!</p>
+<h1 id="step-7-creating-a-pull-request-pr">Step 7: Creating a Pull Request (PR)</h1>
+<p>A pull request is a way of alerting a repository’s owners that you want to make some changes to their code. It allows them to review the code and make sure it looks good.</p>
+<p>This is what the PR page looks like before you’ve submitted it:</p>
+<p>This is what it looks like once you’ve submitted the PR request:</p>
+<p>You may see that big green button at the bottom that says ‘Merge pull request’. Hitting this button means you’ll merge your changes into the master branch.</p>
+<p>It’s not always the case that the button will be green. In some cases you’ll be faced with a <strong>merge conflict</strong> - this is when there’s a change in one file that is different in another file, and git can’t figure out which version to use. You’ll have to manually go through and tell git which version to use.</p>
+<p>As a side note, it’s not nice to push a change directly to the master branch. In most cases you probably won’t have the authorization to do that anyways.</p>
+<h1 id="step-8-merging-a-pr">Step 8: Merging a PR</h1>
+<p>Go ahead and press that green ‘Merge pull request’ button. This will cause your changes to go into the master branch.</p>
+<p>When done, it’s always nice to delete your branch (too many branches can get hard to follow), so hit that grey ‘Delete branch’ button as well.</p>
+<p>You can double check that your commits actually got merged. Go to the first page of the repo (<a href="https://github.com/diegodl/git101">https://github.com/diegodl/git101</a>) and click on the ‘Commits’ link.</p>
+<p>From there you’ll see a list of all the commits in that branch. You can see the one that I just merged right up top.</p>
+<p>You can also see on the right hand side the hash code (SHA-1) of the commit. That’s essentially a unique identifier for that specific commit. It’s useful because it gives you the ability to refer to specific commits, and if you need to roll-back a change you made, you can use the <code>git revert (hash code number)</code> command.</p>
+<h1 id="step-9-almost-done-time-to-get-your-changes-on-github-back-to-your-computer">Step 9: Almost done! Time to get your changes on GitHub back to your computer</h1>
+<p>Right now the repo on GitHub looks a little different than what you have on your local machine. For instance, the commit you made in your branch and merged into the master branch doesn’t exist in the master branch on your local machine.</p>
+<p>In order to get the most recent changes that you or others have merged on GitHub, use the <code>git pull origin master</code> command.</p>
+<p>This shows you all the files that have changed and by how much.</p>
+<p>Now we can use the  <code>git log</code> command again and see all the new commits that happen.</p>
+<p>(Note, you may need to switch branches back to the master branch. You can do that using the <code>git checkout master</code> command).</p>
+<h1 id="step-10-basking-in-your-git-glory">Step 10: Basking in your git glory</h1>
+<p>Great job!</p>
+<p>Now if you’d like, you can check out the other files in this folder for even more git tips and tricks.</p>
+<h1 id="step-11-more-teamwork">Step 11: More teamwork</h1>
+<p>If you have extra time, I’d recommend working with your team to simulate a smaller team project. For instance, have your team make a new folder with your team name, and add some files with text in it. Then try pushing those changes to this remote repository. The more you use git, the more comfortable you’ll… git with it :)</p>
+<p>Afterwards, the team can start making changes to files they didn’t originally create. Then retry the process of using the pull request feature. Afterwards you can use the <strong>git blame</strong> and the <strong>git history</strong> tool on GitHub to see how you can keep track of all the changes people have made in a file, and all the people who have made changes.</p>
+<p>Basado en : Tutorial on git and GitHub for beginners, designed for the <a href="http://www.meetup.com/Women-Who-Code-Boston/events/224072838/">Women Who Code meetup</a> held on August 12, 2015 at <a href="http://www.hubspot.com">HubSpot</a>.</p>
+</div>
+</body>
+
+</html>
